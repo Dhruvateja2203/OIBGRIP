@@ -1,0 +1,99 @@
+<html>
+  <head>
+    <title>To-Do App</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      
+      h1 {
+        text-align: center;
+        margin-top: 50px;
+      }
+      
+      form {
+        text-align: center;
+        margin-top: 50px;
+      }
+      
+      input[type="text"] {
+        padding: 10px;
+        font-size: 18px;
+        width: 50%;
+        margin-right: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      
+      button[type="submit"] {
+        padding: 10px 20px;
+        font-size: 18px;
+        background-color: rgb(1, 251, 26);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover{
+        background-color: rgb(55, 236, 73); 
+        cursor: pointer;
+      }
+      
+      ul {
+        list-style: none;
+        margin-top: 50px;
+        padding: 0;
+        width: 50%;
+        margin: 0 auto;
+      }
+      
+      li {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+        text-align: left;
+      }
+      
+      .delete-button {
+        float: right;
+        font-size: 24px;
+        color: red;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><u>My To-do List</u></h1>
+    <form>
+        <input type="text" id="taskInput" placeholder="Enter a task">
+      <button type="submit">Add Task</button>
+    </form>
+    <ul id="taskList">
+    </ul>
+    
+    <script>
+      const form = document.querySelector("form");
+      const taskInput = document.querySelector("#taskInput");
+      const taskList = document.querySelector("#taskList");
+      
+      form.addEventListener("submit", addTask);
+      
+      function addTask(e) {
+        e.preventDefault();
+        const task = taskInput.value;
+        if (!task) return;
+        
+        const li = document.createElement("li");
+        li.innerHTML = `${task} <span class="delete-button">&times;</span>`;
+        taskList.appendChild(li);
+        taskInput.value = "";
+        
+        li.querySelector(".delete-button").addEventListener("click", removeTask);
+      }
+      
+      function removeTask(e) {
+        e.target.parentElement.remove();
+      }
+    </script>
+  </body>
+</html>
